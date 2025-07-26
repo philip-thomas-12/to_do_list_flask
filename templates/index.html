@@ -13,15 +13,17 @@
             <th>added</th>
             <th>actions</th> 
         </tr>
+        {% for task in tasks %}
         <tr>
-             <td></td>
-            <td></td>
+             <td>{{ task.content }}</td>
+            <td>{{ task.date_created.date() }}</td>
             <td>
                 <a href="">delete</a>
                 <br>
                 <a href="">update</a>
             </td>
         </tr>                                       
+        {% endfor %}
     </table>
     
     <form action="/" method="POST">

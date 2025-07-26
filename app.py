@@ -18,18 +18,17 @@ class Todo(db.Model):
 def index():
 
     if request.method == 'POST':
-       t=request.form['content']
-       n=todo(content=t)
+       task_content = request.form['content']
+       new_task = Todo(content=task_content)
        try:
-           
-           db.session.add(n)
+           db.session.add(new_task)
            db.session.commit()
            return redirect('/')
        except:
            return 'There was an issue adding your task'
     else:
-        return render_template('index.html')
-
+        tasks = Todo.query.order_by(Todo.date_created).all()
+        return render_template('index.html',tasks=tasks)
     
 if __name__ == "__main__":
     app.run(debug=True)
